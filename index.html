@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fi">
+    <head>
+        <!-- Meta tiedot -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Full stack web-projekteja retro-futurismin hengessä.">
+        <title>RetroWeb - Full Stack Projects</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+        
+        <!-- Oma CSS -->
+        <style>
+
+            /* CSS muuttujat */
+            :root {
+                /* Värit */
+                --kerma: #F5F0E4;
+                --beige: #EDE8D8;
+                --keltainen: #D4A017;
+                --punainen:#C0392B;
+                --okra: #B8860B;
+                --navyblue: #1B3A5C;
+                --leipäteksti: #2C1810;
+
+                /* Fontit */
+                --fontti-h1: 'Audiowide', sans-serif;
+                --fontti-h2: 'Michroma', sans-serif;
+                --fontti-body: 'Josefin Sans', sans-serif;
+            }
+
+            /* Perusasetukset */
+            html, body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+            body {
+                background: var(--kerma);
+                color: var(--leipäteksti);
+                font-family: var(--fontti-body);
+                font-size: clamp(0.9rem, 1.5vw, 1rem);
+                line-height: 1.7;
+            }
+
+            /* Typografia */
+            h1 {
+                font-family: var(--fontti-h1);
+                font-size: clamp(2rem, 5vw, 3.5rem);
+                color: var(--navyblue);
+                line-height: 1.15;
+            }
+            h2 {
+                font-family: var(--fontti-h2);
+                font-size: clamp(1.2rem, 3vw, 2rem);
+                color: var(--navyblue);
+                line-height: 1.3;
+            }
+            h3 {
+                font-family: var(--fontti-h2);
+                font-size: clamp(0.85rem, 2vw, 1.1rem);
+                color: var(--navyblue);
+                line-height: 1.4;
+            }
+            p {
+                font-family: var(--fontti-body);
+                font-size: clamp(0.85rem, 1.5vw, 1rem);
+                line-height: 1.8;
+            }
+
+            /* Navigaatio */
+            .navbar {
+                background: var(--beige);
+                border-bottom: 3px solid var(--keltainen);
+                padding: 0.5rem 0;
+            }
+            /* Atomi SVG logo */
+            .nav-brand {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                opacity: 1;
+                transition: opacity 0.2s;
+            }
+            .nav-brand:hover { opacity: 0.75; }
+
+            /* Nav-linkit */
+            .nav-link-custom {
+                font-family: var(--fontti-h2);
+                font-size: clamp(0.85rem, 1.5vw, 1rem);
+                letter-spacing: 0.12em;
+                color: var(--navyblue);
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+            .nav-link-custom:hover { color: var(--punainen); }
+
+            .nav-link-custom.active {
+                color: var(--navyblue);
+                border-bottom: 2px solid var(--keltainen);
+            }
+
+            /* Hamburger-ikoni */
+            .navbar-toggler { border-color: var(--navyblue); }
+
+            .navbar-toggler-icon { filter: invert(15%) sepia(40%) saturate(800%) hue-rotate(180deg); }
+
+            .navbar-toggler:focus { box-shadow: none; }
+
+            /* Pikkuteksti osioiden yläpuolella */
+            .tagline {
+                font-family: var(--fontti-h2);
+                font-size: clamp(0.6rem, 1.2vw, 0.7rem);
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--okra);
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+
+            /* Värikaistale osioiden välissä */
+            .divider {
+                height: 4px;
+                border: none;
+                display: flex;
+                margin: 0;
+                padding: 0;
+            }
+
+            .divider span { flex: 1; }
+
+        </style>
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-md sticky-top" aria-label="Päänavigaatio">
+            <div class="container">
+
+                <!-- Atomi logo -->
+                <a href="#" class="nav-brand navbar-brand">
+                    <svg id="atomSvg" width="42" height="42" viewBox="0 0 60 60" aria-hidden="true">
+
+                        <!-- Orbitaalit -->
+                        <ellipse cx="30" cy="30" rx="26" ry="10" fill="none" stroke="var(--navyblue)" stroke-width="1.8"/>
+                        <ellipse cx="30" cy="30" rx="26" ry="10" fill="none" stroke="var(--okra)" stroke-width="1.8" transform="rotate(60 30 30)"/>
+                        <ellipse cx="30" cy="30" rx="26" ry="10" fill="none" stroke="var(--punainen)" stroke-width="1.8" transform="rotate(120 30 30)"/>
+
+                        <!-- Ydin -->
+                        <circle cx="30" cy="30" r="5" fill="var(--punainen)"/>
+
+                        <!-- Elektronit -->
+                        <circle id="e1" r="3" fill="var(--navyblue)"/>
+                        <circle id="e2" r="3" fill="var(--okra)"/>
+                        <circle id="e3" r="3" fill="var(--punainen)"/>
+
+                    </svg>
+                </a>
+
+                <!-- Bootstrapin oma hamburger -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Avaa valikko">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Linkit -->
+                <div class="collapse navbar-collapse" id="navMenu">
+                    <ul class="navbar-nav ms-auto gap-md-3" role="list">
+                        <li class="nav-item"><a href="#" class="nav-link-custom">Home</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link-custom">Portfolio</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link-custom active">Build-o-Tron</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+
+            // Atomin elektronien animointi
+            (function() {
+                // Orbitaalin parametrit
+                const orbitals = [
+                    { el: document.getElementById('e1'), rx: 26, ry: 10, tilt: 0,   speed: 3000 },
+                    { el: document.getElementById('e2'), rx: 26, ry: 10, tilt: 60,  speed: 4000 },
+                    { el: document.getElementById('e3'), rx: 26, ry: 10, tilt: 120, speed: 5000 }
+                ];
+
+                // Atomin keskipiste
+                const cx = 30, cy = 30;
+
+                function animate(timestamp) {
+                    orbitals.forEach(o => {
+                        // Lasketaan kulma radiaaneina ajan perusteella
+                        const angle = (timestamp / o.speed) * 2 * Math.PI;
+
+                        // Elektroni ellipsillä ennen kallistusta
+                        const x = o.rx * Math.cos(angle);
+                        const y = o.ry * Math.sin(angle);
+
+                        // Käännetään orbitaalin kallistuskulmaan
+                        const tiltRad = o.tilt * Math.PI / 180;
+                        const rx = x * Math.cos(tiltRad) - y * Math.sin(tiltRad);
+                        const ry = x * Math.sin(tiltRad) + y * Math.cos(tiltRad);
+                        
+                        // Asetetaan elektroni oikeaan kohtaan
+                        o.el.setAttribute('cx', cx + rx);
+                        o.el.setAttribute('cy', cy + ry);
+                    });
+
+                    requestAnimationFrame(animate);
+                }
+
+                requestAnimationFrame(animate);
+            })();
+
+        </script>
+    </body>
+</html>
