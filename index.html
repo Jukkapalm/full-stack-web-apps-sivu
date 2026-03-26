@@ -90,6 +90,7 @@
                 text-decoration: none;
                 opacity: 1;
                 transition: opacity 0.2s;
+                cursor: default;
             }
             .nav-brand:hover { opacity: 0.75; }
 
@@ -120,7 +121,7 @@
             /* Pikkuteksti osioiden yläpuolella */
             .tagline {
                 font-family: var(--fontti-h2);
-                font-size: clamp(0.6rem, 1.2vw, 0.7rem);
+                font-size: clamp(0.75rem, 1.5vw, 0.9rem);
                 letter-spacing: 0.2em;
                 text-transform: uppercase;
                 color: var(--okra);
@@ -197,6 +198,7 @@
                 line-height: 1;
                 will-change: transform;
             }
+
         </style>
     </head>
     <body>
@@ -250,8 +252,13 @@
                         <span class="tagline">Full Stack Web Apps</span>
                         <h1>Built for<br>Tomorrow</h1>
                         <p class="hero-desc">
-                            Web applications that will still work when robots have taken over the world. 
-                            Probably. We haven't tested that part yet.
+                            Web applications that will still work when
+                            robots have taken over the world. Probably.
+                            We haven't tested that part yet. But the
+                            loading spinner will look great during the
+                            apocalypse — that much is guaranteed.
+                            Fueled by questionable life choices and a
+                            concerning number of browser tabs.
                         </p>
                     </div>
 
@@ -357,6 +364,45 @@
 
                 requestAnimationFrame(animateRocket);
             }
+
+            // Savupartikkelit rakettiin
+            function createSmoke() {
+                const smoke = document.createElement('div');
+
+                // Lasketaan raketin perän sijainti suunnan perusteella
+                const tailAngle = rAngle * Math.PI / 180;
+                const tailX = rX - Math.sin(tailAngle) * 30;
+                const tailY = rY + Math.cos(tailAngle) * 30;
+
+                smoke.style.cssText = `
+                    position: absolute;
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background: rgba(100, 80, 60, 0.4);
+                    left: ${tailX}px;
+                    top: ${tailY}px;
+                    transform: translate(-50%, -50%);
+                    pointer-events: none;
+                    z-index: 2;
+                    transition: all 0.8s ease-out;
+                `;
+                hero.appendChild(smoke);
+
+                // Häivytetään ja poistetaan
+                requestAnimationFrame(() => {
+                    smoke.style.width    = '20px';
+                    smoke.style.height   = '20px';
+                    smoke.style.opacity  = '0';
+                    smoke.style.background = 'rgba(100, 80, 60, 0)';
+                });
+
+                // Poistetaan DOM:sta kun animaatio valmis
+                setTimeout(() => smoke.remove(), 800);
+            }
+
+            // Luodaan savua tasaisin väliajoin
+            setInterval(createSmoke, 100);
 
             window.addEventListener('load', function() {
                 initRocket();
